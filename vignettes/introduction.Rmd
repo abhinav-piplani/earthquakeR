@@ -1,0 +1,97 @@
+---
+title: "Vignette for package earthquakeR"
+author: "Abhinav Piplani"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Vignette Info
+
+This vignette provides a meaningful description of the package earthquakeR and how it should be used. The usage of all the functions are decsribed one by one
+
+
+
+```{r,   message=F, warning=F}
+library(earthquakeR)
+library(dplyr)
+library(ggplot2)
+library(grid)
+library(leaflet)
+library(lubridate)
+library(magrittr)
+library(readr)
+library(stringi)
+#knitr::opts_chunk$set(echo = TRUE, tidy = TRUE)
+
+```
+
+## Read the raw data  into a data frame
+
+
+
+```{r, message=F, warning=F}
+data <- eq_data()
+head(data)
+```
+
+
+## Clean the  data for using in the visualization functions created
+
+
+
+```{r, message=F, warning=F}
+data <- eq_clean_data(data) %>% eq_location_clean()
+head(data)
+
+```
+
+## Plot earthquake timeline
+
+```{r , message=F, warning=F, fig.width = 10}
+ g <-  data %>%
+    dplyr::filter(year(DATE) > 2000  & COUNTRY %in% c("CANADA")) %>%
+    dplyr::mutate(TOTAL_DEATHS = as.numeric(TOTAL_DEATHS),
+                  EQ_PRIMARY = as.numeric(EQ_PRIMARY)) %>%
+    ggplot2::ggplot(ggplot2::aes(x = DATE,
+                                 y = COUNTRY,
+                                 colour = TOTAL_DEATHS,
+                                 size = EQ_PRIMARY
+    )) +
+    geom_timeline()
+g
+
+```
+
+## Plot earthquake timeline label
+
+```{r , message=F, warning=F , fig.width = 10}
+g <-  data %>%
+    dplyr::filter(year(DATE) > 2000  & COUNTRY %in% c("CANADA")) %>%
+    dplyr::mutate(TOTAL_DEATHS = as.numeric(TOTAL_DEATHS),
+                  EQ_PRIMARY = as.numeric(EQ_PRIMARY)) %>%
+    ggplot2::ggplot(ggplot2::aes(x = DATE,
+                                 y = COUNTRY,
+                                 colour = TOTAL_DEATHS,
+                                 size = EQ_PRIMARY
+    )) +
+    geom_timeline() +
+      labs(size = "Richter scale value", color = "# deaths") +
+         geom_timeline_label(ggplot2::aes(label = LOCATION_NAME), n_max = 3)
+g
+
+```
+
+## Visualizing earthquake on map
+
+```{r , message=F, warning=F , fig.width = 10}
+  data %>%
+   dplyr::filter(YEAR > 2000 & neg.date == 0 & COUNTRY %in% c("MEXICO")) %>%
+      dplyr::mutate(popup_text = eq_create_label(.)) %>%
+   eq_map(annot_col = "popup_text")
+
+```
+
