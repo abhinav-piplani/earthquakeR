@@ -1,7 +1,4 @@
 
-# rm(list= ls())
-# setwd("F:/Coursera/Mastering Software Development in R/5 - Capstone Project/R-package/earthquakeR/")
-
 #' Read the NOAA dataset
 #'
 #' @param file.name Path for raw data for NOAA dataset(default - signif.txt)
@@ -53,6 +50,7 @@ eq_clean_data <-function(df) {
 #' @examples \dontrun{
 #'   data <- eq_clean_data(eq_data()) %>% eq_location_clean()
 #' }
+#' @export
 eq_location_clean <- function(df) {
 
   df <- as.data.frame(df)
@@ -256,6 +254,7 @@ geom_timeline_label <- function(mapping = NULL, data = NULL, stat = "identity",
 #' @details Only requires DATE column in the dataset
 #' @importFrom magrittr %>%
 #' @importFrom leaflet addCircleMarkers addTiles leaflet
+#' @importFrom testthat test_that
 #'
 #' @examples \dontrun{
 #'    eq_clean_data(eq_data()) %>% eq_location_clean() %>%
