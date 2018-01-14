@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Abhinav Piplani
 Maintainer: Abhinav Piplani <abhinavpiplani@yahoo.co.in>
 Description: R Package for Capstone Project for course - Documentation, Packaging & Testing.
-License: GPL (>= 2)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: testthat,
