@@ -8,9 +8,8 @@ Description: R Package for Capstone Project for course - Documentation, Packagin
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: testthat,
-    knitr,
+Suggests: knitr,
     rmarkdown
-Imports: dplyr, ggplot2, grid, leaflet, lubridate, magrittr, readr,stringi
+Imports: dplyr, ggplot2, grid, leaflet, lubridate, magrittr, readr,stringi, testthat
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr

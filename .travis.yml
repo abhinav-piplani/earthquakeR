@@ -1,0 +1,17 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+sudo: required
+install:
+  - Rscript -e 'install.packages("readr", repos = "http://cran.rstudio.com")'
+  - Rscript -e 'install.packages("dplyr", repos = "http://cran.rstudio.com")'
+  - Rscript -e 'install.packages("ggplot2", repos = "http://cran.rstudio.com")'
+  - Rscript -e 'install.packages("grid", repos = "http://cran.rstudio.com")'
+  - Rscript -e 'install.packages("maps", repos = "http://cran.rstudio.com")'
+  - Rscript -e 'install.packages("knitr", repos = "http://cran.rstudio.com")'
+  - Rscript -e 'install.packages("magrittr", repos = "http://cran.rstudio.com")'
+  - Rscript -e 'install.packages("stringi", repos = "http://cran.rstudio.com")'
+  - Rscript -e 'install.packages("rmarkdown", repos = "http://cran.rstudio.com")'
+  - Rscript -e 'install.packages("leaflet", repos = "http://cran.rstudio.com")'
+  - Rscript -e 'install.packages("lubridate", repos = "http://cran.rstudio.com")'
+  - Rscript -e 'install.packages("testthat", repos = "http://cran.rstudio.com")'
